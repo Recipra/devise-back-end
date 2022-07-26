@@ -1,5 +1,16 @@
 import { Profile } from "../models/profile.js"
 
+function index(req, res) {
+  Profile.findById(req.params.id)
+  .then(profile => {
+    res.status(200).json(profile.assignments)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 function create(req, res) {
   Profile.findById(req.params.id)
   .then(profile => {
@@ -14,5 +25,6 @@ function create(req, res) {
 }
 
 export {
+  index,
   create
 }
