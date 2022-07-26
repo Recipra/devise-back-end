@@ -5,7 +5,7 @@ function create(req, res) {
   .then(profile => {
     profile.assignments.push(req.body)
     profile.save()
-    res.json(profile)
+    res.json(profile.assignments[(profile.assignments.length - 1)])
   })
   .catch(err => {
     console.log(err)

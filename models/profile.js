@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const assignmentSchema = new mongoose.Schema({
   name: String,
   dueDate: Date,
-  estTime: Number,
+  estTime: {type: Number, min: 1},
   completed: Boolean
 },{
   timestamps: true,
