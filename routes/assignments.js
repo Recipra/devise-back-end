@@ -11,6 +11,7 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.get('/:id', checkAuth, assignmentsCtrl.index)
 router.post('/:id', checkAuth, assignmentsCtrl.create)
+router.put('/:id/:assignmentId', checkAuth, assignmentsCtrl.update)
 router.delete('/:id/:assignmentId', checkAuth, assignmentsCtrl.delete)
 
 export { router }

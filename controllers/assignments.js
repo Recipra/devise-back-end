@@ -37,8 +37,30 @@ function deleteAssignment(req, res) {
   })
 }
 
+function update(req, res) {
+  // console.log('THIS FIRED')
+  console.log('THIS FIRED', req.body)
+  Profile.findById(req.params.id)
+  .then(profile => {
+    profile.assignments.forEach(assignment => {
+      if (assignment._id === req.params.assignmentId) {
+        assignment.name = req.body.name
+        assignment.dueDate = req.body.dueDate
+        assignment.estTime = req.body.estTime
+        profile.save()
+        res.status(200).json(profile.assignments)
+      }
+    })
+  })
+  .catch (err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export {
   index,
   create,
+  update,
   deleteAssignment as delete
 }
