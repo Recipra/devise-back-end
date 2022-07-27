@@ -24,7 +24,21 @@ function create(req, res) {
   })
 }
 
+function deleteAssignment(req, res) {
+  Profile.findById(req.params.id)
+  .then(profile => {
+    profile.assignments.remove({_id: req.params.assignmentId})
+    profile.save()
+    res.status(200).json(profile.assignments)
+  })
+  .catch (err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export {
   index,
-  create
+  create,
+  deleteAssignment as delete
 }
